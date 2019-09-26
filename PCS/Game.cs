@@ -49,13 +49,13 @@ namespace PCS
                     if (rand.Next(0, 3) == 0)
                     {
                         solution[i, j] = 0;
-                        box.BackColor = Color.White;
+                       // box.BackColor = Color.White;
 
                     }
                     else
                     {
                         solution[i, j] = 1;
-                        box.BackColor = Color.Black;
+                      //  box.BackColor = Color.Black;
 
                     }
                 }
@@ -131,7 +131,7 @@ namespace PCS
                     this.Controls.Add(sideLabel);
                 }
             }
-            this.Size = new Size(boardSize * 50, boardSize * 50);
+            this.Size = new Size(boardSize * 70, boardSize * 70);
         }
 
         private Boolean checkSolution()
@@ -157,9 +157,6 @@ namespace PCS
             }
         }
 
-            
-                
-        
         private void Box_Click(object sender, EventArgs e)
         {
             Box boxClicked = (Box)sender;
@@ -192,10 +189,6 @@ namespace PCS
                     }
                 }
             }
-
-
-            
         }
     }
 }
-
