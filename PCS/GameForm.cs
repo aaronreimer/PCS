@@ -20,7 +20,8 @@ namespace PCS
         static int[,] guess, solution;
         Random rand;
         List<String> rowList, colList;
-        
+      
+
 
         private void TxtSize_TextChanged(object sender, EventArgs e)
         {
@@ -58,29 +59,19 @@ namespace PCS
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-
             foreach (Label l in pnlGamePanel.Controls.OfType<Label>())
             {
                 l.Visible = false;
             }
-            foreach (Box b  in pnlGamePanel.Controls.OfType<Box>())
+            foreach (Box b in pnlGamePanel.Controls.OfType<Box>())
             {
                 b.Visible = false;
             }
             try
             {
                 size = int.Parse(txtSize.Text);
-            }
-            catch (Exception)
-            {
-
-            }
-            try
-            {
-
                 seed = int.Parse(txtSeed.Text);
                 seed = txtSeed.Text.GetHashCode();
-
             }
             catch (Exception)
             {
@@ -100,16 +91,32 @@ namespace PCS
             guess = new int[size, size];
 
 
+            getSolution(rand);
+            setupLabels(solution);
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+
+                }
+            }
+        }
+
+        private void getSolution(Random rand)
+        {
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     guess[i, j] = 3;
-                    Box box = new Box();
-                    box.Height = 20;
-                    box.Width = 20;
-                    box.Top = 100 + (20 * i);
-                    box.Left = 100 + (20 * j);
+                    Box box = new Box
+                    {
+                        Height = 20,
+                        Width = 20,
+                        Top = 100 + (20 * i),
+                        Left = 100 + (20 * j)
+                    };
 
                     box.MouseDown += Box_Click;
                     box.BorderStyle = BorderStyle.FixedSingle;
@@ -117,120 +124,98 @@ namespace PCS
                     box.row = i;
                     box.col = j;
                     pnlGamePanel.Controls.Add(box);
-                    int result = rand.Next(0, 3);
-                    if (result == 0)
+                    if (rand.Next(0,3) == 0)
                     {
                         solution[i, j] = 0;
-                        // box.BackColor = Color.White;
-
                     }
                     else
                     {
                         solution[i, j] = 1;
-                        //  box.BackColor = Color.Black;
-
                     }
-
                 }
+            }
+        }
+        private void setupLabels(int[,] solution)
+        {
 
-                //row numbers
+            for (int i = 0; i < size; i++)
+            {
+
                 string row = "";
-
+                string col = "";
                 for (int j = 0; j < size; j++)
                 {
-                    if (j == 0 && solution[i, j] == 0 || j == size - 1 && solution[i, j] == 0)
-                    {
-
-                    }
-                    else
+                    if ((j != 0 || solution[i, j] != 0) && (j != size - 1 || solution[i, j] != 0))
                     {
                         row += solution[i, j];
+                    }
+
+                    if ((j != 0 || solution[j, i] != 0) && (j != size - 1 || solution[j, i] != 0))
+                    {
+                        col += solution[j, i];
                     }
 
                 }
 
                 rowList = new List<String>();
-
-
                 rowList = row.Split('0').ToList();
                 rowList.RemoveAll(item => item == "");
 
-
-
-                for (int k = 0; k < rowList.Count; k++)
-                {
-                    Label sideLabel = new Label();
-                    sideLabel.Width = 15;
-                    sideLabel.Height = 20;
-                    sideLabel.Top = 102 + 20 * i;
-                    sideLabel.Left = 105 - rowList.Count * 20 + 20 * k;
-                    sideLabel.Text = "0";
-                    
-                    sideLabel.Text = rowList[k].Length.ToString();
-                    
-                    pnlGamePanel.Controls.Add(sideLabel);
-                }
-            }
-
-            //col numbers
-            for (int i = 0; i < size; i++)
-            {
-
-                string col = "";
-                for (int j = 0; j < size; j++)
-                {
-                    if (j == 0 && solution[j, i] == 0 || j == size - 1 && solution[j, i] == 0)
-                    {
-
-                    }
-                    else
-                    {
-                        col += solution[j, i];
-                    }
-                }
                 colList = new List<String>();
-               
                 colList = col.Split('0').ToList();
                 colList.RemoveAll(item => item == "");
-            
+                if(rowList.Count == 0)
+                {
+                    Label sideLabel = new Label
+                    {
+                        Width = 15,
+                        Height = 20,
+                        Top = 102 + 20 * i,
+                        Left = 85,
+                        Text = "0"
+                    };
+
+                    pnlGamePanel.Controls.Add(sideLabel);
+                }
+                for (int k = 0; k < rowList.Count; k++)
+                {
+                    Label sideLabel = new Label
+                    {
+                        Width = 15,
+                        Height = 20,
+                        Top = 102 + 20 * i,
+                        Left = 105 - rowList.Count * 20 + 20 * k,
+
+                        Text = rowList[k].Length.ToString()
+                    };
+                    pnlGamePanel.Controls.Add(sideLabel);
+                }
+                if(colList.Count == 0)
+                {
+                    Label sideLabel = new Label
+                    {
+                        Width = 20,
+                        Height = 20,
+                        Top = 85,
+                        Left = 102 + 20 * i,
+                        Text = "0"
+                    };
+                    pnlGamePanel.Controls.Add(sideLabel);
+                }
                 for (int k = 0; k < colList.Count; k++)
                 {
-
-                    Label sideLabel = new Label();
-                    sideLabel.Width = 20;
-                    sideLabel.Height = 20;
-                    sideLabel.Top = 105 - colList.Count * 20 + 20 * k;
-                    sideLabel.Left = 102 + 20 * i;
-
-                    string a = "1" + colList[k].Length.ToString();
-                    if (a.Contains("1"))
+                    Label sideLabel = new Label
                     {
-                        sideLabel.Text = "0";
-                    }
-                    else
-                    {
-                        sideLabel.Text = colList[k].Length.ToString();
-                    }
-               
-                        
-                
-                    
+                        Width = 20,
+                        Height = 20,
+                        Top = 105 - colList.Count * 20 + 20 * k,
+                        Left = 102 + 20 * i,
+                        Text = colList[k].Length.ToString()
+                    };
                     pnlGamePanel.Controls.Add(sideLabel);
                 }
             }
-
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Debug.Write(solution[i, j]);
-                }
-            }
-            Debug.Write("\n");
-
         }
-
-
 
         private void BtnBack_Click(object sender, EventArgs e)
         {

@@ -43,6 +43,7 @@
             this.btnSolution = new System.Windows.Forms.Button();
             this.lblTimer = new System.Windows.Forms.Label();
             this.tmrGameTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnCreate = new System.Windows.Forms.Button();
             this.pnlSetupControls.SuspendLayout();
             this.pnlGamePanel.SuspendLayout();
             this.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             // pnlSetupControls
             // 
+            this.pnlSetupControls.Controls.Add(this.btnCreate);
             this.pnlSetupControls.Controls.Add(this.label1);
             this.pnlSetupControls.Controls.Add(this.txtSize);
             this.pnlSetupControls.Controls.Add(this.btnBest);
@@ -135,17 +137,19 @@
             this.pnlSetupControls.Controls.Add(this.btnStart);
             this.pnlSetupControls.Location = new System.Drawing.Point(12, 12);
             this.pnlSetupControls.Name = "pnlSetupControls";
-            this.pnlSetupControls.Size = new System.Drawing.Size(217, 152);
+            this.pnlSetupControls.Size = new System.Drawing.Size(217, 170);
             this.pnlSetupControls.TabIndex = 9;
             // 
             // pnlGamePanel
             // 
+            this.pnlGamePanel.AutoSize = true;
+            this.pnlGamePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlGamePanel.Controls.Add(this.btnBack);
             this.pnlGamePanel.Controls.Add(this.btnSolution);
             this.pnlGamePanel.Controls.Add(this.lblTimer);
             this.pnlGamePanel.Location = new System.Drawing.Point(12, 12);
             this.pnlGamePanel.Name = "pnlGamePanel";
-            this.pnlGamePanel.Size = new System.Drawing.Size(353, 366);
+            this.pnlGamePanel.Size = new System.Drawing.Size(144, 53);
             this.pnlGamePanel.TabIndex = 11;
             this.pnlGamePanel.Visible = false;
             // 
@@ -183,21 +187,34 @@
             this.tmrGameTimer.Enabled = true;
             this.tmrGameTimer.Interval = 1000;
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(59, 133);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(85, 23);
+            this.btnCreate.TabIndex = 8;
+            this.btnCreate.Text = "Create Puzzle";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.BtnStart_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 403);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(722, 340);
             this.Controls.Add(this.pnlGamePanel);
             this.Controls.Add(this.pnlSetupControls);
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Setup";
+            this.Text = "PCS";
             this.pnlSetupControls.ResumeLayout(false);
             this.pnlSetupControls.PerformLayout();
             this.pnlGamePanel.ResumeLayout(false);
             this.pnlGamePanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -217,6 +234,7 @@
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Timer tmrGameTimer;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
 
