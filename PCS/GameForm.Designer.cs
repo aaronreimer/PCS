@@ -36,7 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.chkTimeAttack = new System.Windows.Forms.CheckBox();
-            this.btnBest = new System.Windows.Forms.Button();
             this.pnlSetupControls = new System.Windows.Forms.Panel();
             this.btnCreate = new System.Windows.Forms.Button();
             this.pnlGamePanel = new System.Windows.Forms.Panel();
@@ -119,23 +118,11 @@
             this.chkTimeAttack.Text = "Timed Mode";
             this.chkTimeAttack.UseVisualStyleBackColor = true;
             // 
-            // btnBest
-            // 
-            this.btnBest.Location = new System.Drawing.Point(121, 104);
-            this.btnBest.Name = "btnBest";
-            this.btnBest.Size = new System.Drawing.Size(75, 23);
-            this.btnBest.TabIndex = 7;
-            this.btnBest.Text = "Best Times";
-            this.btnBest.UseVisualStyleBackColor = true;
-            this.btnBest.Visible = false;
-            this.btnBest.Click += new System.EventHandler(this.BtnBest_Click);
-            // 
             // pnlSetupControls
             // 
             this.pnlSetupControls.Controls.Add(this.btnCreate);
             this.pnlSetupControls.Controls.Add(this.label1);
             this.pnlSetupControls.Controls.Add(this.txtSize);
-            this.pnlSetupControls.Controls.Add(this.btnBest);
             this.pnlSetupControls.Controls.Add(this.txtSeed);
             this.pnlSetupControls.Controls.Add(this.chkTimeAttack);
             this.pnlSetupControls.Controls.Add(this.label2);
@@ -279,7 +266,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.CheckBox chkTimeAttack;
-        private System.Windows.Forms.Button btnBest;
         private System.Windows.Forms.Panel pnlSetupControls;
         private System.Windows.Forms.Panel pnlGamePanel;
         private System.Windows.Forms.Button btnSolution;

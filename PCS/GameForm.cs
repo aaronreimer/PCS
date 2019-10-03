@@ -28,33 +28,6 @@ namespace PCS
             lblSize.Text = "x " + txtSize.Text;
         }
 
-        private void BtnBest_Click(object sender, EventArgs e)
-        {
-            /* pnlTimes.Visible = true;
-             pnlSetupControls.Visible = false;
-             pnlTimes.Left = 0;
-             pnlTimes.Top = 0;
-
-             StreamReader sr = new StreamReader("times.txt");
-             string line;
-             while (!sr.EndOfStream)
-             {
-                 line = sr.ReadLine();
-                 if (line.StartsWith("z"))
-                 {
-                     if (tbcBestTimes.TabPages.ContainsKey(line[1] + "x" + line[1]))
-                     {
-
-                     }
-                     else
-                     {
-                         tbcBestTimes.TabPages.Add(line[1] + "x" + line[1]);
-                     }
-
-
-                 }
-             }*/
-        }
 
         private void BtnCreate_Click(object sender, EventArgs e)
         {
@@ -301,7 +274,7 @@ namespace PCS
             }
             else
             {
-                MessageBox.Show("not yet");
+                MessageBox.Show("Unimplemented");
             }
         }
 
