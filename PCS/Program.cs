@@ -16,7 +16,7 @@ namespace PCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SetupForm());
+            Application.Run(new GameForm());
         }
     }
 }

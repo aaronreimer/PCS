@@ -38,14 +38,20 @@
             this.chkTimeAttack = new System.Windows.Forms.CheckBox();
             this.btnBest = new System.Windows.Forms.Button();
             this.pnlSetupControls = new System.Windows.Forms.Panel();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.pnlGamePanel = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSolution = new System.Windows.Forms.Button();
             this.lblTimer = new System.Windows.Forms.Label();
             this.tmrGameTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnCreate = new System.Windows.Forms.Button();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.msSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.msLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.msExit = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSetupControls.SuspendLayout();
             this.pnlGamePanel.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSize
@@ -135,10 +141,20 @@
             this.pnlSetupControls.Controls.Add(this.label2);
             this.pnlSetupControls.Controls.Add(this.lblSize);
             this.pnlSetupControls.Controls.Add(this.btnStart);
-            this.pnlSetupControls.Location = new System.Drawing.Point(12, 12);
+            this.pnlSetupControls.Location = new System.Drawing.Point(12, 27);
             this.pnlSetupControls.Name = "pnlSetupControls";
             this.pnlSetupControls.Size = new System.Drawing.Size(217, 170);
             this.pnlSetupControls.TabIndex = 9;
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(59, 133);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(85, 23);
+            this.btnCreate.TabIndex = 8;
+            this.btnCreate.Text = "Create Puzzle";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.BtnCreate_Click);
             // 
             // pnlGamePanel
             // 
@@ -147,7 +163,7 @@
             this.pnlGamePanel.Controls.Add(this.btnBack);
             this.pnlGamePanel.Controls.Add(this.btnSolution);
             this.pnlGamePanel.Controls.Add(this.lblTimer);
-            this.pnlGamePanel.Location = new System.Drawing.Point(12, 12);
+            this.pnlGamePanel.Location = new System.Drawing.Point(12, 27);
             this.pnlGamePanel.Name = "pnlGamePanel";
             this.pnlGamePanel.Size = new System.Drawing.Size(144, 53);
             this.pnlGamePanel.TabIndex = 11;
@@ -187,15 +203,46 @@
             this.tmrGameTimer.Enabled = true;
             this.tmrGameTimer.Interval = 1000;
             // 
-            // btnCreate
+            // menuStrip
             // 
-            this.btnCreate.Location = new System.Drawing.Point(59, 133);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(85, 23);
-            this.btnCreate.TabIndex = 8;
-            this.btnCreate.Text = "Create Puzzle";
-            this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.BtnStart_Click);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(722, 24);
+            this.menuStrip.TabIndex = 12;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msSave,
+            this.msLoad,
+            this.msExit});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // msSave
+            // 
+            this.msSave.Name = "msSave";
+            this.msSave.Size = new System.Drawing.Size(180, 22);
+            this.msSave.Text = "Save";
+            this.msSave.Click += new System.EventHandler(this.MsSave_Click);
+            // 
+            // msLoad
+            // 
+            this.msLoad.Name = "msLoad";
+            this.msLoad.Size = new System.Drawing.Size(180, 22);
+            this.msLoad.Text = "Load";
+            this.msLoad.Click += new System.EventHandler(this.MsLoad_Click);
+            // 
+            // msExit
+            // 
+            this.msExit.Name = "msExit";
+            this.msExit.Size = new System.Drawing.Size(180, 22);
+            this.msExit.Text = "Exit";
+            this.msExit.Click += new System.EventHandler(this.MsExit_Click);
             // 
             // GameForm
             // 
@@ -206,13 +253,18 @@
             this.ClientSize = new System.Drawing.Size(722, 340);
             this.Controls.Add(this.pnlGamePanel);
             this.Controls.Add(this.pnlSetupControls);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PCS";
+            this.Load += new System.EventHandler(this.GameForm_Load);
             this.pnlSetupControls.ResumeLayout(false);
             this.pnlSetupControls.PerformLayout();
             this.pnlGamePanel.ResumeLayout(false);
             this.pnlGamePanel.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,6 +287,11 @@
         private System.Windows.Forms.Timer tmrGameTimer;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem msSave;
+        private System.Windows.Forms.ToolStripMenuItem msLoad;
+        private System.Windows.Forms.ToolStripMenuItem msExit;
     }
 }
 
