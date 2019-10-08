@@ -263,6 +263,7 @@ namespace PCS
             if (creationMode)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.FileName = "savegame.pcs";
                 if(saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //cmode

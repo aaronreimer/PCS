@@ -111,6 +111,7 @@
             // 
             // pnlSetupControls
             // 
+            this.pnlSetupControls.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pnlSetupControls.Controls.Add(this.lblErrorMsg);
             this.pnlSetupControls.Controls.Add(this.btnCreate);
             this.pnlSetupControls.Controls.Add(this.label1);
@@ -195,7 +196,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(722, 24);
+            this.menuStrip.Size = new System.Drawing.Size(299, 24);
             this.menuStrip.TabIndex = 12;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -247,7 +248,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(722, 340);
+            this.ClientSize = new System.Drawing.Size(299, 258);
             this.Controls.Add(this.pnlSetupControls);
             this.Controls.Add(this.pnlGamePanel);
             this.Controls.Add(this.menuStrip);
