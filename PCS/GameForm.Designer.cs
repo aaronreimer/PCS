@@ -35,21 +35,23 @@
             this.txtSeed = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
-            this.chkTimeAttack = new System.Windows.Forms.CheckBox();
             this.pnlSetupControls = new System.Windows.Forms.Panel();
             this.btnCreate = new System.Windows.Forms.Button();
             this.pnlGamePanel = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTimer = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnSolution = new System.Windows.Forms.Button();
-            this.lblTimer = new System.Windows.Forms.Label();
             this.tmrGameTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msSave = new System.Windows.Forms.ToolStripMenuItem();
             this.msLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.msExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblErrorMsg = new System.Windows.Forms.Label();
             this.pnlSetupControls.SuspendLayout();
             this.pnlGamePanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,24 +109,13 @@
             this.lblSize.TabIndex = 4;
             this.lblSize.Text = "x";
             // 
-            // chkTimeAttack
-            // 
-            this.chkTimeAttack.AutoSize = true;
-            this.chkTimeAttack.Location = new System.Drawing.Point(14, 60);
-            this.chkTimeAttack.Name = "chkTimeAttack";
-            this.chkTimeAttack.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkTimeAttack.Size = new System.Drawing.Size(85, 17);
-            this.chkTimeAttack.TabIndex = 6;
-            this.chkTimeAttack.Text = "Timed Mode";
-            this.chkTimeAttack.UseVisualStyleBackColor = true;
-            // 
             // pnlSetupControls
             // 
+            this.pnlSetupControls.Controls.Add(this.lblErrorMsg);
             this.pnlSetupControls.Controls.Add(this.btnCreate);
             this.pnlSetupControls.Controls.Add(this.label1);
             this.pnlSetupControls.Controls.Add(this.txtSize);
             this.pnlSetupControls.Controls.Add(this.txtSeed);
-            this.pnlSetupControls.Controls.Add(this.chkTimeAttack);
             this.pnlSetupControls.Controls.Add(this.label2);
             this.pnlSetupControls.Controls.Add(this.lblSize);
             this.pnlSetupControls.Controls.Add(this.btnStart);
@@ -135,7 +126,7 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(59, 133);
+            this.btnCreate.Location = new System.Drawing.Point(111, 104);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(85, 23);
             this.btnCreate.TabIndex = 8;
@@ -147,14 +138,31 @@
             // 
             this.pnlGamePanel.AutoSize = true;
             this.pnlGamePanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pnlGamePanel.Controls.Add(this.panel1);
             this.pnlGamePanel.Controls.Add(this.btnBack);
             this.pnlGamePanel.Controls.Add(this.btnSolution);
-            this.pnlGamePanel.Controls.Add(this.lblTimer);
             this.pnlGamePanel.Location = new System.Drawing.Point(12, 27);
             this.pnlGamePanel.Name = "pnlGamePanel";
-            this.pnlGamePanel.Size = new System.Drawing.Size(144, 53);
+            this.pnlGamePanel.Size = new System.Drawing.Size(154, 53);
             this.pnlGamePanel.TabIndex = 11;
             this.pnlGamePanel.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblTimer);
+            this.panel1.Location = new System.Drawing.Point(84, 7);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(67, 19);
+            this.panel1.TabIndex = 5;
+            // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Location = new System.Drawing.Point(3, 1);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(57, 13);
+            this.lblTimer.TabIndex = 2;
+            this.lblTimer.Text = "Time: 0:00";
             // 
             // btnBack
             // 
@@ -176,19 +184,10 @@
             this.btnSolution.UseVisualStyleBackColor = true;
             this.btnSolution.Click += new System.EventHandler(this.BtnSolution_Click);
             // 
-            // lblTimer
-            // 
-            this.lblTimer.AutoSize = true;
-            this.lblTimer.Location = new System.Drawing.Point(84, 8);
-            this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(57, 13);
-            this.lblTimer.TabIndex = 2;
-            this.lblTimer.Text = "Time: 0:00";
-            // 
             // tmrGameTimer
             // 
-            this.tmrGameTimer.Enabled = true;
             this.tmrGameTimer.Interval = 1000;
+            this.tmrGameTimer.Tick += new System.EventHandler(this.TmrGameTimer_Tick);
             // 
             // menuStrip
             // 
@@ -213,23 +212,34 @@
             // msSave
             // 
             this.msSave.Name = "msSave";
-            this.msSave.Size = new System.Drawing.Size(180, 22);
+            this.msSave.Size = new System.Drawing.Size(100, 22);
             this.msSave.Text = "Save";
             this.msSave.Click += new System.EventHandler(this.MsSave_Click);
             // 
             // msLoad
             // 
             this.msLoad.Name = "msLoad";
-            this.msLoad.Size = new System.Drawing.Size(180, 22);
+            this.msLoad.Size = new System.Drawing.Size(100, 22);
             this.msLoad.Text = "Load";
             this.msLoad.Click += new System.EventHandler(this.MsLoad_Click);
             // 
             // msExit
             // 
             this.msExit.Name = "msExit";
-            this.msExit.Size = new System.Drawing.Size(180, 22);
+            this.msExit.Size = new System.Drawing.Size(100, 22);
             this.msExit.Text = "Exit";
             this.msExit.Click += new System.EventHandler(this.MsExit_Click);
+            // 
+            // lblErrorMsg
+            // 
+            this.lblErrorMsg.AutoSize = true;
+            this.lblErrorMsg.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblErrorMsg.Location = new System.Drawing.Point(16, 65);
+            this.lblErrorMsg.Name = "lblErrorMsg";
+            this.lblErrorMsg.Size = new System.Drawing.Size(95, 13);
+            this.lblErrorMsg.TabIndex = 12;
+            this.lblErrorMsg.Text = "Enter a board size.";
+            this.lblErrorMsg.Visible = false;
             // 
             // GameForm
             // 
@@ -238,8 +248,8 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(722, 340);
-            this.Controls.Add(this.pnlGamePanel);
             this.Controls.Add(this.pnlSetupControls);
+            this.Controls.Add(this.pnlGamePanel);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "GameForm";
@@ -249,7 +259,8 @@
             this.pnlSetupControls.ResumeLayout(false);
             this.pnlSetupControls.PerformLayout();
             this.pnlGamePanel.ResumeLayout(false);
-            this.pnlGamePanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -265,7 +276,6 @@
         private System.Windows.Forms.TextBox txtSeed;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblSize;
-        private System.Windows.Forms.CheckBox chkTimeAttack;
         private System.Windows.Forms.Panel pnlSetupControls;
         private System.Windows.Forms.Panel pnlGamePanel;
         private System.Windows.Forms.Button btnSolution;
@@ -278,6 +288,8 @@
         private System.Windows.Forms.ToolStripMenuItem msSave;
         private System.Windows.Forms.ToolStripMenuItem msLoad;
         private System.Windows.Forms.ToolStripMenuItem msExit;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblErrorMsg;
     }
 }
 

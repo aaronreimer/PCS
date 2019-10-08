@@ -15,8 +15,7 @@ namespace PCS
             InitializeComponent();
         }
 
-        int size, seed, seconds, minutes;
-        public static bool timed;
+        int size, seed, seconds=1, minutes;
         static int[,] guess, solution;
         Random rand;
         List<String> rowList, colList;
@@ -31,61 +30,69 @@ namespace PCS
 
         private void BtnCreate_Click(object sender, EventArgs e)
         {
+            lblTimer.Visible = false;
             msSave.Enabled = true;
             ClearGameBoard();
             creationMode = true;
             try
             {
                 size = int.Parse(txtSize.Text);
+                pnlGamePanel.Visible = true;
+                pnlSetupControls.Visible = false;
+                guess = new int[size, size];
+                GenerateBlank();
             }
-            catch (Exception)
+            catch
             {
-
+                lblErrorMsg.Visible = true;
             }
-            pnlGamePanel.Visible = true;
-            pnlSetupControls.Visible = false;
-            guess = new int[size, size];
-            GenerateBlank();
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
+            
             msSave.Enabled = true;
+            tmrGameTimer.Start();
             ClearGameBoard();
             try
             {
                 size = int.Parse(txtSize.Text);
-                seed = int.Parse(txtSeed.Text);
 
-            }
-            catch (Exception)
-            {
+
                 try
                 {
-                    seed = txtSeed.Text.GetHashCode();
+                    seed = int.Parse(txtSeed.Text);
                 }
                 catch (Exception)
                 {
-                    Random r = new Random();
-                    seed = r.Next();
+                    try
+                    {
+                        seed = txtSeed.Text.GetHashCode();
+                    }
+                    catch (Exception)
+                    {
+                        Random r = new Random();
+                        seed = r.Next();
+                    }
                 }
+
+                rand = new Random(seed);
+                pnlGamePanel.Visible = true;
+                pnlSetupControls.Visible = false;
+                lblTimer.Visible = true;
+
+                solution = new int[size, size];
+                guess = new int[size, size];
+
+
+                GenerateSolution(rand);
+
+                setupLabels(solution);
             }
-
-            timed = chkTimeAttack.Checked;
-            rand = new Random(seed);
-            pnlGamePanel.Visible = true;
-            pnlSetupControls.Visible = false;
-            lblTimer.Visible = GameForm.timed;
-            tmrGameTimer.Enabled = GameForm.timed;
-
-            solution = new int[size, size];
-            guess = new int[size, size];
-
-
-            GenerateSolution(rand);
-            
-            setupLabels(solution);
-
+            catch
+            {
+                lblErrorMsg.Visible = true;
+            }
         }
         private void GenerateBlank()
         {
@@ -235,9 +242,11 @@ namespace PCS
 
         private void BtnBack_Click(object sender, EventArgs e)
         {
+            seconds = 0;
             pnlGamePanel.Visible = false;
             pnlSetupControls.Visible = true;
             msSave.Enabled = false;
+            lblErrorMsg.Visible = false;
         }
 
 
@@ -347,23 +356,7 @@ namespace PCS
                 if (checkSolution())
                 {
                     LockBoard();
-                    if (GameForm.timed)
-                    {
-
-                        try
-                        {
-                            Debug.WriteLine(size + minutes + seconds);
-                            StreamWriter sw = new StreamWriter("times.txt", true);
-                            sw.WriteLine("z" + size);
-                            sw.WriteLine("m" + minutes);
-                            sw.WriteLine("s" + seconds);
-                            sw.Close();
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                    }
+                  
 
                     MessageBox.Show("You win");
                 }
